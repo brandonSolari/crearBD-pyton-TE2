@@ -10,9 +10,22 @@ cursor.execute("""
         telefono TEXT
     )
 """)
-#insertar datos
-cursor.execute("INSERT INTO dueno (nombre, telefono) VALUES ('Juan Pérez', '70012345')")
-cursor.execute("INSERT INTO dueno (nombre, telefono) VALUES ('María López', '71123456')")
-cursor.execute("INSERT INTO dueno (nombre, telefono) VALUES ('Carlos Mamani', '72234567')")
+
+#crear tabala mascota
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS mascota (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nombre TEXT NOT NULL,
+        especie TEXT,
+        dueno_id INTEGER,
+        FOREIGN KEY (dueno_id) REFERENCES dueno(id)
+    )
+""")
+
+
+# isnertar datos en la tabla mascota
+cursor.execute("INSERT INTO mascota (nombre, especie, dueno_id) VALUES ('Firulais', 'Perro', 1)")
+cursor.execute("INSERT INTO mascota (nombre, especie, dueno_id) VALUES ('Misi', 'Gato', 2)")
+cursor.execute("INSERT INTO mascota (nombre, especie, dueno_id) VALUES ('Rocky', 'Perro', 3)")
 
 conexion.commit()
