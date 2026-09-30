@@ -22,10 +22,20 @@ cursor.execute("""
     )
 """)
 
+# crear la tabla cita
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS cita (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        fecha TEXT,
+        motivo TEXT,
+        mascota_id INTEGER,
+        FOREIGN KEY (mascota_id) REFERENCES mascota(id)
+    )
+""")
 
-# isnertar datos en la tabla mascota
-cursor.execute("INSERT INTO mascota (nombre, especie, dueno_id) VALUES ('Firulais', 'Perro', 1)")
-cursor.execute("INSERT INTO mascota (nombre, especie, dueno_id) VALUES ('Misi', 'Gato', 2)")
-cursor.execute("INSERT INTO mascota (nombre, especie, dueno_id) VALUES ('Rocky', 'Perro', 3)")
+#insertar datos a la tabal cita 
+cursor.execute("INSERT INTO cita (fecha, motivo, mascota_id) VALUES ('2026-10-05', 'Vacuna', 1)")
+cursor.execute("INSERT INTO cita (fecha, motivo, mascota_id) VALUES ('2026-10-07', 'Revisión', 2)")
+cursor.execute("INSERT INTO cita (fecha, motivo, mascota_id) VALUES ('2026-10-10', 'Desparasitación', 3)")
 
 conexion.commit()
